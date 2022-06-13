@@ -1,0 +1,64 @@
+#+title: Notes Boltzman Sampling
+#+latex_header: \usepackage[margin=2cm]{geometry}
+
+* Medium
+
+Video (manim) ~30'
+
+Jupyer(?) blog-y thing
+
+* Outline
+
+** What is B.S., Binary Tree
+
+How would one generate a binary tree.
+
+*** Dynamic prog. Algorithm [Wilf 1978]
+
+Let $T_n$ be the number of binary trees with $n$ nodes
+So
+- $T_1 = 1$
+- $T_n = \sum_{k = 1}^{n - 1} T_k×T_{n-k-1}$
+generate(n) :=
+    $k$ ← RV with distribution such that $p_k = T_k T_{n-k-1} / T_n$
+    if n = 1 then return Leaf
+    else return Node(generate(k),generate(n-k-1))
+
+*** Boltzman Sampling
+Recursive random choice 
+#+begin_example
+data Tree = Leaf | Node Tree Tree
+generate p =
+  if random < p then
+    Leaf
+  else
+    Node (generate p) (generate p)
+#+end_example
+
+** Not only binary trees
+
+T(z) = (1-sqrt(1-4z))/2
+
+Algorithm 3: Boltzmann sampler for rooted plane trees
+Data: real value $z$
+Result: Random tree of variable size, target expected size 𝑛
+Function Generate(z):
+    Carefully look at the equation $T(z) = z(1 + Tz + Tz² + ...)$
+    Generate random variable $X$ from geometric distribution with
+        parameter $T(z)$: P(X=k) = T(z)^k(1−T(z))
+    for i = 1 to k do
+        $R_i$ := Generate(z)
+    return Z(R_1 R_2 ... R_k)
+
+** Tuning samplers
+
+T(z) genereating fn
+T'(z) = dT(z)/dz
+E(N) = zT'(z)/T(z)
+p(N = n) = T_n z^n / T(z)
+
+zT'(z) = nΣ(T_n) z^n
+
+** Exact sampling is hard (#P-complete)
+** Applications
+
