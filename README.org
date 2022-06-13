@@ -1,1 +1,3 @@
 #+title: some2
+
+Project for the 2nd edition of the Summer of Math Exposition
