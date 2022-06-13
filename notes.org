@@ -50,6 +50,12 @@ Function Generate(z):
         $R_i$ := Generate(z)
     return Z(R_1 R_2 ... R_k)
 
+** Present Boltzmann samplers in full generality
+
+*** With one parameter
+
+*** With several parameters
+
 ** Tuning samplers
 
 T(z) genereating fn
@@ -61,4 +67,8 @@ zT'(z) = nΣ(T_n) z^n
 
 ** Exact sampling is hard (#P-complete)
 ** Applications
+
+*** Application 1: sampling RNA structures
+*** Application 2: software testing
+*** Application 3: queueing theory
 
